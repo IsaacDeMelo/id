@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Search, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, ShieldCheck } from 'lucide-react';
 import { PRODUCTS, CHARACTER_CLASSES } from './constants';
 import { CartItem, Product, ViewState, CustomerDetails } from './types';
 import ProductCard from './components/ProductCard';
