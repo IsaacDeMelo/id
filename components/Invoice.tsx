@@ -88,32 +88,32 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
   }
 
   return (
-    <div className="max-w-3xl mx-auto animate-fade-in pb-10">
+    <div className="max-w-3xl mx-auto animate-fade-in pb-10 px-4">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <Button variant="secondary" onClick={onBack}>
-          <ArrowLeft size={16} /> Voltar à Loja
+        <Button variant="secondary" size="sm" onClick={onBack}>
+          <ArrowLeft size={14} /> Voltar à Loja
         </Button>
-        <Button onClick={handleDownload}>
-          <Download size={16} /> Baixar Recibo (PNG)
+        <Button size="sm" onClick={handleDownload}>
+          <Download size={14} /> Baixar Recibo (PNG)
         </Button>
       </div>
 
-      {/* INVOICE AREA */}
+      {/* INVOICE AREA - More compact and refined */}
       <div 
         ref={invoiceRef}
-        className="bg-parchment text-ink p-8 md:p-16 shadow-2xl rounded-sm min-h-[1050px] flex flex-col w-full mx-auto relative overflow-hidden"
+        className="bg-parchment text-ink p-6 md:p-10 shadow-2xl rounded-sm flex flex-col w-full mx-auto relative overflow-hidden"
         style={{ fontFamily: "'Cinzel', serif" }}
       >
         {/* Paper texture overlay simulation */}
         <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
 
-        <div className="border-4 border-double border-ink/30 p-8 md:p-12 flex-1 flex flex-col relative z-10">
+        <div className="border-2 border-double border-ink/40 p-6 md:p-8 flex-1 flex flex-col relative z-10">
           
           {/* Header */}
-          <div className="text-center border-b-2 border-ink pb-8 mb-8">
-            <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2 text-ink">O Empório do Dragão Dourado</h1>
-            <p className="font-sans text-xs font-bold opacity-70 tracking-[0.3em] text-ink uppercase">Fornecedor Oficial do Reino</p>
-            <div className="mt-6 text-[10px] font-sans flex justify-between px-2 opacity-60 text-ink">
+          <div className="text-center border-b border-ink/60 pb-6 mb-6">
+            <h1 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-1 text-ink">O Empório do Dragão Dourado</h1>
+            <p className="font-sans text-[9px] font-bold opacity-70 tracking-[0.3em] text-ink uppercase">Fornecedor Oficial do Reino</p>
+            <div className="mt-4 text-[9px] font-sans flex justify-between px-2 opacity-60 text-ink italic">
               <span>SOL DE VERÃO, ANO 1422</span>
               <span>VALE DAS SOMBRAS, QG</span>
               <span>DATA: {date}</span>
@@ -121,20 +121,20 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
           </div>
 
           {/* Customer Info */}
-          <div className="mb-10 font-sans text-ink">
-            <div className="grid grid-cols-2 gap-y-6">
+          <div className="mb-8 font-sans text-ink">
+            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
               <div>
-                <span className="block text-[10px] uppercase tracking-widest opacity-50 mb-1">Portador</span>
-                <span className="text-xl font-bold font-serif">{customer.name}</span>
+                <span className="block text-[9px] uppercase tracking-[0.15em] opacity-60 mb-0.5">Portador</span>
+                <span className="text-base font-bold font-serif">{customer.name}</span>
               </div>
               <div className="text-right">
-                <span className="block text-[10px] uppercase tracking-widest opacity-50 mb-1">Vocação</span>
-                <span className="text-xl font-bold font-serif">{customer.characterClass}</span>
+                <span className="block text-[9px] uppercase tracking-[0.15em] opacity-60 mb-0.5">Vocação</span>
+                <span className="text-base font-bold font-serif">{customer.characterClass}</span>
               </div>
               {customer.guild && (
-                 <div className="col-span-2 pt-2">
-                    <span className="block text-[10px] uppercase tracking-widest opacity-50 mb-1">Aliança / Guilda</span>
-                    <span className="font-bold text-lg">{customer.guild}</span>
+                 <div className="col-span-2 pt-2 border-t border-ink/5">
+                    <span className="block text-[9px] uppercase tracking-[0.15em] opacity-60 mb-0.5">Guilda</span>
+                    <span className="font-bold text-sm">{customer.guild}</span>
                  </div>
               )}
             </div>
@@ -142,22 +142,22 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
 
           {/* Table */}
           <div className="flex-grow">
-            <table className="w-full mb-10 font-sans text-sm text-ink">
+            <table className="w-full mb-8 font-sans text-xs text-ink">
               <thead>
-                <tr className="border-b-2 border-ink/40 text-left">
-                  <th className="py-3 w-1/2 uppercase tracking-wider text-xs">Artefato</th>
-                  <th className="py-3 text-center uppercase tracking-wider text-xs">Qtd</th>
-                  <th className="py-3 text-right uppercase tracking-wider text-xs">Unit.</th>
-                  <th className="py-3 text-right uppercase tracking-wider text-xs">Total</th>
+                <tr className="border-b border-ink/40 text-left">
+                  <th className="py-2 w-1/2 uppercase tracking-widest text-[10px] font-black">Item</th>
+                  <th className="py-2 text-center uppercase tracking-widest text-[10px] font-black">Qtd</th>
+                  <th className="py-2 text-right uppercase tracking-widest text-[10px] font-black">Unit.</th>
+                  <th className="py-2 text-right uppercase tracking-widest text-[10px] font-black">Total</th>
                 </tr>
               </thead>
               <tbody>
                 {items.map((item, idx) => (
-                  <tr key={idx} className="border-b border-ink/10">
-                    <td className="py-3 font-bold font-serif">{item.name}</td>
-                    <td className="py-3 text-center">{item.quantity}</td>
-                    <td className="py-3 text-right">{item.price} PO</td>
-                    <td className="py-3 text-right font-bold">{item.price * item.quantity} PO</td>
+                  <tr key={idx} className="border-b border-ink/5">
+                    <td className="py-2 font-bold font-serif text-sm">{item.name}</td>
+                    <td className="py-2 text-center">{item.quantity}</td>
+                    <td className="py-2 text-right">{item.price} PO</td>
+                    <td className="py-2 text-right font-bold">{item.price * item.quantity} PO</td>
                   </tr>
                 ))}
               </tbody>
@@ -165,70 +165,69 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
           </div>
 
           {/* Financial Summary */}
-          <div className="border-t-2 border-ink pt-6 mb-12 flex flex-col items-end gap-2">
-            <div className="flex justify-between w-full md:w-64 text-sm font-sans opacity-70">
-              <span>OURO ENTREGUE:</span>
+          <div className="border-t border-ink/40 pt-4 mb-8 flex flex-col items-end gap-1">
+            <div className="flex justify-between w-full md:w-56 text-[10px] font-sans opacity-70">
+              <span>ENTREGUE:</span>
               <span className="font-bold">{userBudget} PO</span>
             </div>
-            <div className="flex justify-between w-full md:w-64 text-sm font-sans opacity-70">
+            <div className="flex justify-between w-full md:w-56 text-[10px] font-sans opacity-70">
               <span>SUBTOTAL:</span>
               <span className="font-bold">-{total} PO</span>
             </div>
-            <div className="flex justify-between w-full md:w-64 border-t border-ink/20 pt-2 text-xl font-serif font-black">
+            <div className="flex justify-between w-full md:w-56 border-t border-ink/20 pt-2 mt-1 text-lg font-serif font-black">
               <span>TROCO:</span>
-              <span>{change} PO</span>
+              <span className="text-ink">{change} PO</span>
             </div>
           </div>
 
           {/* Footer / Signatures */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8 border-t border-ink/20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-ink/20">
             <div className="text-center md:text-left">
-              <p className="italic font-sans text-xs opacity-70 mb-8 leading-relaxed">"{flavorText}"</p>
+              <p className="italic font-sans text-[10px] opacity-70 mb-6 leading-tight max-w-[240px]">"{flavorText}"</p>
               
-              <div className="inline-block border border-ink p-3 rotate-[-1deg] bg-parchment shadow-sm">
-                <span className="block text-[8px] uppercase tracking-[0.2em] opacity-50 mb-1">Selo de Autenticidade</span>
-                <span className="font-mono text-sm tracking-widest font-bold">{receiptId}</span>
+              <div className="inline-block border border-ink/60 p-2 rotate-[-0.5deg] bg-parchment/50">
+                <span className="block text-[7px] uppercase tracking-widest opacity-60 mb-0.5 font-bold">Autenticação Rúnica</span>
+                <span className="font-mono text-[10px] tracking-widest font-black">{receiptId}</span>
               </div>
             </div>
 
             <div className="flex flex-col items-center justify-end">
-              <div className="w-full max-w-[280px] text-center relative">
-                {/* Signature - Adjusted to "Saey" only and closer to line */}
+              <div className="w-full max-w-[200px] text-center relative">
+                {/* Signature - "Saey" close to line and smaller */}
                 <div 
-                  className="font-signature quill-ink text-8xl text-ink mb-0 select-none pointer-events-none h-16 flex items-center justify-center tracking-tight"
+                  className="font-signature quill-ink text-6xl text-ink mb-0 select-none pointer-events-none h-12 flex items-center justify-center"
                   style={{ 
-                    transform: 'translateY(18px) rotate(-4deg)',
-                    filter: 'drop-shadow(1px 1px 0px rgba(0,0,0,0.1)) contrast(1.2)'
+                    transform: 'translateY(12px) rotate(-3deg)',
+                    filter: 'contrast(1.1) brightness(0.8)'
                   }}
                 >
                   Saey
                 </div>
                 
                 {/* Signing Line */}
-                <div className="border-t-2 border-ink/60 w-full pt-1.5 mt-2">
-                  <span className="text-[10px] uppercase tracking-widest opacity-70 block leading-tight font-sans font-bold">Autenticado por Pena Real</span>
-                  <span className="text-[9px] opacity-60 italic block font-sans tracking-wide mt-0.5">{STORE_OWNER_NAME}</span>
+                <div className="border-t border-ink/60 w-full pt-1.5 mt-1">
+                  <span className="text-[8px] uppercase tracking-widest opacity-80 block font-sans font-black leading-none">Pena Real</span>
+                  <span className="text-[7px] opacity-60 italic block font-sans tracking-tight mt-0.5">{STORE_OWNER_NAME}</span>
                 </div>
               </div>
 
-              {/* Seal with Enhanced "Stamped" effect and extra border */}
-              <div className="mt-10 relative flex items-center justify-center group">
-                 {/* Extra Outer Border for Carimbo look */}
-                 <div className="absolute w-24 h-24 border-2 border-red-900/20 rounded-full rotate-45 opacity-40 group-hover:opacity-60 transition-opacity"></div>
-                 <div className="absolute w-22 h-22 border-[3px] border-red-900/30 rounded-full -rotate-12 opacity-50 border-double"></div>
+              {/* Seal with Double Border Stamp style */}
+              <div className="mt-6 relative flex items-center justify-center">
+                 {/* Double border stamp effect */}
+                 <div className="absolute w-16 h-16 border border-red-900/10 rounded-full rotate-45 opacity-30"></div>
+                 <div className="absolute w-14 h-14 border-2 border-red-900/20 rounded-full -rotate-12 opacity-40 border-double"></div>
                  
                  {/* QR Stamp */}
-                 <div className="w-16 h-16 relative grayscale contrast-[2.5] mix-blend-multiply opacity-50 hover:opacity-80 transition-opacity flex items-center justify-center">
+                 <div className="w-10 h-10 relative grayscale contrast-[2] mix-blend-multiply opacity-40 hover:opacity-70 transition-opacity">
                     <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${receiptId}&color=450a0a`} 
-                      alt="Selo Real" 
-                      className="w-full h-full p-2" 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${receiptId}&color=450a0a`} 
+                      alt="Stamp" 
+                      className="w-full h-full p-1.5" 
                     />
-                    {/* Dirt/Grunge overlay for the stamp */}
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dust.png')] opacity-40 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dust.png')] opacity-50 pointer-events-none"></div>
                  </div>
                  
-                 <span className="absolute -bottom-3 text-[9px] font-sans font-black text-red-900/50 uppercase tracking-[0.3em] rotate-[-8deg] pointer-events-none">
+                 <span className="absolute -bottom-2.5 text-[7px] font-sans font-black text-red-900/40 uppercase tracking-[0.2em] rotate-[-5deg] pointer-events-none">
                     VALIDADO
                  </span>
               </div>
@@ -237,8 +236,8 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
 
         </div>
       </div>
-      <p className="text-center text-stone-500 text-[10px] uppercase tracking-widest mt-6 opacity-50">
-        Este pergaminho é um documento fiscal mágico. Falsificação punível com petrificação imediata pelo Conselho Superior de Magos.
+      <p className="text-center text-stone-500 text-[9px] uppercase tracking-[0.2em] mt-6 opacity-40 font-bold max-w-md mx-auto leading-relaxed">
+        Pergaminho fiscal mágico. Falsificação sujeita a petrificação pelo Conselho do Império.
       </p>
     </div>
   );
