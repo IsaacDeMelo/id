@@ -192,12 +192,16 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
             </div>
 
             <div className="flex flex-col items-center justify-end">
-              <div className="w-full max-w-[200px] text-center">
-                <div className="font-handwriting text-3xl text-ink mb-1 select-none pointer-events-none h-10 flex items-center justify-center">
-                  {STORE_OWNER_NAME}
+              <div className="w-full max-w-[240px] text-center">
+                <div 
+                  className="font-handwriting text-5xl text-ink mb-1 select-none pointer-events-none h-16 flex items-center justify-center -rotate-2 opacity-90"
+                  style={{ textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }}
+                >
+                  {STORE_OWNER_NAME.split(',')[0]}
                 </div>
                 <div className="border-t border-ink/40 w-full pt-1">
-                  <span className="text-[10px] uppercase tracking-widest opacity-50">Assinatura do Mercador</span>
+                  <span className="text-[10px] uppercase tracking-widest opacity-50 block leading-tight">Assinatura do Mercador</span>
+                  <span className="text-[9px] opacity-40 italic block">{STORE_OWNER_NAME}</span>
                 </div>
               </div>
               <div className="mt-6 opacity-30 grayscale contrast-125">
