@@ -1,7 +1,7 @@
 import React from 'react';
 import { CartItem } from '../types';
 import Button from './Button';
-import { X, Minus, Plus, Trash2, Coins } from 'lucide-react';
+import { X, Minus, Plus, Trash2, ShoppingCart } from 'lucide-react';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -10,6 +10,7 @@ interface CartSidebarProps {
   onUpdateQuantity: (id: string, delta: number) => void;
   onRemove: (id: string) => void;
   onCheckout: () => void;
+  userBudget: number;
 }
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
@@ -18,7 +19,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   items,
   onUpdateQuantity,
   onRemove,
-  onCheckout
+  onCheckout,
 }) => {
   const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
@@ -36,7 +37,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
         {/* Header */}
         <div className="p-4 border-b border-stone-700 flex justify-between items-center bg-stone-900">
           <h2 className="font-serif text-xl text-gold flex items-center gap-2">
-            <Coins className="text-gold" />
+            <ShoppingCart className="text-gold" size={20} />
             Sua Algibeira
           </h2>
           <button onClick={onClose} className="text-stone-400 hover:text-white transition-colors">
@@ -49,20 +50,20 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-stone-500 gap-4">
               <div className="w-16 h-16 border-2 border-stone-700 rounded-full flex items-center justify-center">
-                <X size={32} />
+                <ShoppingCart size={32} className="opacity-20" />
               </div>
-              <p>Sua algibeira está vazia, aventureiro.</p>
+              <p className="font-serif italic text-sm">Sua algibeira está vazia, aventureiro.</p>
             </div>
           ) : (
             items.map(item => (
-              <div key={item.id} className="bg-stone-800 rounded-lg p-3 flex gap-3 border border-stone-700">
-                <img src={item.image} alt={item.name} className="w-16 h-16 rounded object-cover bg-stone-900" />
+              <div key={item.id} className="bg-stone-800/50 rounded-lg p-3 flex gap-3 border border-stone-700/50 group hover:border-gold/30 transition-colors">
+                <img src={item.image} alt={item.name} className="w-16 h-16 rounded object-cover bg-stone-900 border border-stone-700" />
                 <div className="flex-1">
-                  <h4 className="font-serif font-bold text-stone-200 text-sm">{item.name}</h4>
+                  <h4 className="font-serif font-bold text-stone-200 text-sm group-hover:text-gold transition-colors">{item.name}</h4>
                   <p className="text-gold text-sm font-bold">{item.price} PO</p>
                   
                   <div className="flex items-center justify-between mt-2">
-                    <div className="flex items-center gap-2 bg-stone-900 rounded border border-stone-700 px-1">
+                    <div className="flex items-center gap-2 bg-stone-950 rounded border border-stone-700 px-1">
                       <button 
                         onClick={() => onUpdateQuantity(item.id, -1)}
                         className="p-1 text-stone-400 hover:text-white disabled:opacity-30"
@@ -70,7 +71,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                       >
                         <Minus size={14} />
                       </button>
-                      <span className="text-sm font-mono w-4 text-center">{item.quantity}</span>
+                      <span className="text-sm font-mono w-6 text-center text-stone-300">{item.quantity}</span>
                       <button 
                          onClick={() => onUpdateQuantity(item.id, 1)}
                          className="p-1 text-stone-400 hover:text-white"
@@ -80,7 +81,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
                     </div>
                     <button 
                       onClick={() => onRemove(item.id)}
-                      className="text-red-400 hover:text-red-300 p-1"
+                      className="text-stone-500 hover:text-red-400 transition-colors p-1"
                     >
                       <Trash2 size={16} />
                     </button>
@@ -91,20 +92,24 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           )}
         </div>
 
-        {/* Footer / Total */}
+        {/* Footer */}
         <div className="p-6 border-t border-stone-700 bg-stone-800">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-stone-400">Total Estimado</span>
-            <span className="font-serif text-2xl text-gold font-bold">{total} PO</span>
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-stone-400 font-serif uppercase tracking-wider text-xs">Total da Jornada</span>
+            <span className="font-serif text-2xl text-gold font-black">{total} PO</span>
           </div>
+          
           <Button 
-            className="w-full" 
+            className="w-full py-4" 
             size="lg" 
             disabled={items.length === 0}
             onClick={onCheckout}
           >
-            Finalizar Compra
+            Prosseguir para Pagamento
           </Button>
+          <p className="text-[10px] text-stone-500 mt-4 text-center italic">
+            Você definirá seu saldo na próxima etapa.
+          </p>
         </div>
       </div>
     </>
