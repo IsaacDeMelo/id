@@ -18,8 +18,8 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
   const [receiptId, setReceiptId] = useState('');
   const invoiceRef = useRef<HTMLDivElement>(null);
 
-  // Fictitious store owner name
-  const STORE_OWNER_NAME = "Mestre Alaric, o Dourado";
+  // Fictitious luxurious store owner name
+  const STORE_OWNER_NAME = "Magnânimo Arquiduque B. Saey";
 
   // Token Generation Logic (Sum = 21)
   const generateSecretToken = () => {
@@ -192,20 +192,45 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
             </div>
 
             <div className="flex flex-col items-center justify-end">
-              <div className="w-full max-w-[240px] text-center">
+              <div className="w-full max-w-[280px] text-center relative">
+                {/* Signature - Adjusted to "Saey" only and closer to line */}
                 <div 
-                  className="font-handwriting text-5xl text-ink mb-1 select-none pointer-events-none h-16 flex items-center justify-center -rotate-2 opacity-90"
-                  style={{ textShadow: '1px 1px 0px rgba(0,0,0,0.1)' }}
+                  className="font-signature quill-ink text-8xl text-ink mb-0 select-none pointer-events-none h-16 flex items-center justify-center tracking-tight"
+                  style={{ 
+                    transform: 'translateY(18px) rotate(-4deg)',
+                    filter: 'drop-shadow(1px 1px 0px rgba(0,0,0,0.1)) contrast(1.2)'
+                  }}
                 >
-                  {STORE_OWNER_NAME.split(',')[0]}
+                  Saey
                 </div>
-                <div className="border-t border-ink/40 w-full pt-1">
-                  <span className="text-[10px] uppercase tracking-widest opacity-50 block leading-tight">Assinatura do Mercador</span>
-                  <span className="text-[9px] opacity-40 italic block">{STORE_OWNER_NAME}</span>
+                
+                {/* Signing Line */}
+                <div className="border-t-2 border-ink/60 w-full pt-1.5 mt-2">
+                  <span className="text-[10px] uppercase tracking-widest opacity-70 block leading-tight font-sans font-bold">Autenticado por Pena Real</span>
+                  <span className="text-[9px] opacity-60 italic block font-sans tracking-wide mt-0.5">{STORE_OWNER_NAME}</span>
                 </div>
               </div>
-              <div className="mt-6 opacity-30 grayscale contrast-125">
-                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=O_Dragao_Agradece" alt="Selo Real" className="w-12 h-12 mix-blend-multiply" />
+
+              {/* Seal with Enhanced "Stamped" effect and extra border */}
+              <div className="mt-10 relative flex items-center justify-center group">
+                 {/* Extra Outer Border for Carimbo look */}
+                 <div className="absolute w-24 h-24 border-2 border-red-900/20 rounded-full rotate-45 opacity-40 group-hover:opacity-60 transition-opacity"></div>
+                 <div className="absolute w-22 h-22 border-[3px] border-red-900/30 rounded-full -rotate-12 opacity-50 border-double"></div>
+                 
+                 {/* QR Stamp */}
+                 <div className="w-16 h-16 relative grayscale contrast-[2.5] mix-blend-multiply opacity-50 hover:opacity-80 transition-opacity flex items-center justify-center">
+                    <img 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${receiptId}&color=450a0a`} 
+                      alt="Selo Real" 
+                      className="w-full h-full p-2" 
+                    />
+                    {/* Dirt/Grunge overlay for the stamp */}
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dust.png')] opacity-40 pointer-events-none"></div>
+                 </div>
+                 
+                 <span className="absolute -bottom-3 text-[9px] font-sans font-black text-red-900/50 uppercase tracking-[0.3em] rotate-[-8deg] pointer-events-none">
+                    VALIDADO
+                 </span>
               </div>
             </div>
           </div>
@@ -213,7 +238,7 @@ const Invoice: React.FC<InvoiceProps> = ({ items, customer, onBack, userBudget }
         </div>
       </div>
       <p className="text-center text-stone-500 text-[10px] uppercase tracking-widest mt-6 opacity-50">
-        Este pergaminho é um documento fiscal mágico. Falsificação punível com petrificação.
+        Este pergaminho é um documento fiscal mágico. Falsificação punível com petrificação imediata pelo Conselho Superior de Magos.
       </p>
     </div>
   );

@@ -7,10 +7,10 @@
     <title>O Empório do Dragão Dourado</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel, Lato & Zeyada (Rúbrica) -->
+    <!-- Google Fonts: Cinzel, Lato, Zeyada & Monsieur La Doulaise (Assinatura de Pena) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&family=Zeyada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&family=Monsieur+La+Doulaise&family=Zeyada&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -19,6 +19,7 @@
               serif: ['Cinzel', 'serif'],
               sans: ['Lato', 'sans-serif'],
               handwriting: ['Zeyada', 'cursive'],
+              signature: ['"Monsieur La Doulaise"', 'cursive'],
             },
             colors: {
               gold: '#d4af37',
@@ -26,12 +27,19 @@
                 950: '#0c0a09', // Dark background
               },
               parchment: '#f5e6c8',
-              ink: '#4a3728'
+              ink: '#3a2a1d' // Um marrom ainda mais profundo para parecer tinta velha
             }
           }
         }
       }
     </script>
+    <style>
+      /* Efeito de "tinta de pena" - leve variação de opacidade e borrão sutil */
+      .quill-ink {
+        filter: contrast(120%) brightness(90%) drop-shadow(0.2px 0.2px 0px rgba(0,0,0,0.2));
+        opacity: 0.95;
+      }
+    </style>
   <script type="importmap">
 {
   "imports": {
