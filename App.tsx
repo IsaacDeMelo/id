@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { ShoppingBag, Hammer, Plus, ArrowLeft, Trash2, ExternalLink, Globe, Copy, CheckCircle2, CloudLightning, ShieldCheck } from 'lucide-react';
 import { DEFAULT_CONFIG, CHARACTER_CLASSES } from './constants';
-import { CartItem, Product, ViewState, CustomerDetails, StoreConfig } from './types';
+import { CartItem, ViewState, CustomerDetails, StoreConfig } from './types';
 import ProductCard from './components/ProductCard';
 import CartSidebar from './components/CartSidebar';
 import Invoice from './components/Invoice';

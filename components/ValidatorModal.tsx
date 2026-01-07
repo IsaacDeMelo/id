@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { X, ShieldCheck, AlertTriangle, CheckCircle } from 'lucide-react';
 import Button from './Button';
 

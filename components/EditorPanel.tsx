@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { StoreConfig, Product } from '../types';
 import { X, Save, Plus, Trash2, Settings, Database, CloudLightning } from 'lucide-react';
 import Button from './Button';
@@ -12,7 +12,7 @@ interface EditorPanelProps {
   isSaving: boolean;
 }
 
-const EditorPanel: React.FC<EditorPanelProps> = ({ config, onChange, onClose, onSave, isSaving }) => {
+const EditorPanel: FC<EditorPanelProps> = ({ config, onChange, onClose, onSave, isSaving }) => {
   const [activeTab, setActiveTab] = useState<'general' | 'theme' | 'items' | 'publish'>('publish');
 
   const updateTheme = (updates: Partial<typeof config.theme>) => {

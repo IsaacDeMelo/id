@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { CartItem } from '../types';
 import Button from './Button';
 import { X, Minus, Plus, Trash2, ShoppingCart } from 'lucide-react';

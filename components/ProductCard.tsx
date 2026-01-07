@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { Product } from '../types';
 import Button from './Button';
 import { PlusCircle } from 'lucide-react';
