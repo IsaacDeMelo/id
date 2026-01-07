@@ -1,5 +1,6 @@
 
-export type Category = 'weapon' | 'armor' | 'potion' | 'misc';
+export type Category = 'weapon' | 'armor' | 'potion' | 'misc' | 'scroll' | 'artifact';
+export type LayoutType = 'grid' | 'list' | 'compact';
 
 export interface Product {
   id: string;
@@ -8,6 +9,8 @@ export interface Product {
   price: number;
   category: Category;
   image: string;
+  rarity?: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  stock?: number;
 }
 
 export interface CartItem extends Product {
@@ -21,18 +24,25 @@ export interface CustomerDetails {
 }
 
 export interface StoreTheme {
-  primaryColor: string; 
-  backgroundColor: string; 
-  cardColor: string; 
-  parchmentColor: string; 
-  inkColor: string; 
-  borderRadius: string; 
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  backgroundColor: string;
+  cardColor: string;
+  parchmentColor: string;
+  inkColor: string;
+  borderRadius: string;
   fontFamily: 'Cinzel' | 'Lato' | 'Serif' | 'Monospace';
+  layoutType: LayoutType;
+  showBanner: boolean;
+  bannerImage: string;
+  logoImage: string;
+  glassmorphism: boolean;
 }
 
 export interface StoreConfig {
   id: string;
-  slug: string; // Utilizado para url/slug.acdm.online
+  slug: string;
   storeName: string;
   storeTagline: string;
   theme: StoreTheme;
