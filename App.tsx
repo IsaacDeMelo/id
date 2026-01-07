@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { ShoppingBag, ShieldCheck, Hammer, Plus, LayoutGrid, ArrowLeft, Trash2, ExternalLink, Box, Globe, Copy, CheckCircle2, CloudLightning } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { ShoppingBag, Hammer, Plus, ArrowLeft, Trash2, ExternalLink, Globe, Copy, CheckCircle2, CloudLightning, ShieldCheck } from 'lucide-react';
 import { DEFAULT_CONFIG, CHARACTER_CLASSES } from './constants';
 import { CartItem, Product, ViewState, CustomerDetails, StoreConfig } from './types';
 import ProductCard from './components/ProductCard';
@@ -10,8 +10,7 @@ import Button from './components/Button';
 import ValidatorModal from './components/ValidatorModal';
 import EditorPanel from './components/EditorPanel';
 
-// --- Serviço de API Real ---
-const API_URL = '/api'; // Funciona relativo no Render pois o server.js serve o front
+const API_URL = '/api';
 
 const StoreService = {
   async getStores(): Promise<StoreConfig[]> {
@@ -127,7 +126,7 @@ function App() {
   };
 
   const deleteStore = async (id: string) => {
-    if (!confirm("Deseja apagar este domínio permanentemente do Cluster0?")) return;
+    if (!confirm("Deseja apagar este domínio permanentemente?")) return;
     await StoreService.deleteStore(id);
     setStores(stores.filter(s => s.id !== id));
   };
@@ -155,10 +154,17 @@ function App() {
             <span className="font-serif text-xl tracking-tight text-white">ScribeForge SaaS</span>
           </div>
           <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsValidatorOpen(true)}
+              className="text-slate-500 hover:text-gold transition-colors text-xs font-bold uppercase tracking-widest flex items-center gap-2"
+            >
+              <ShieldCheck size={16} /> Verificar Recibo
+            </button>
+            <div className="h-4 w-[1px] bg-slate-800"></div>
             {isAdmin ? (
-              <span className="text-[10px] text-green-400 font-bold uppercase border border-green-500/20 px-2 py-1 rounded">Database Connected</span>
+              <span className="text-[10px] text-green-400 font-bold uppercase border border-green-500/20 px-2 py-1 rounded">DB Online</span>
             ) : (
-              <a href="?role=adm" className="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest border border-slate-800 px-3 py-1 rounded">Acesso Admin</a>
+              <a href="?role=adm" className="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest border border-slate-800 px-3 py-1 rounded">Admin</a>
             )}
           </div>
         </nav>
@@ -167,11 +173,11 @@ function App() {
           <div className="flex justify-between items-center mb-10">
             <div>
               <h2 className="text-3xl font-bold text-white">Domínios Ativos</h2>
-              <p className="text-slate-500 text-sm">Gerencie suas instâncias hospedadas no MongoDB Cluster0</p>
+              <p className="text-slate-500 text-sm">Gerencie suas instâncias no Cluster0</p>
             </div>
             {isAdmin && (
               <button onClick={createNewStore} disabled={isSaving} className="bg-gold text-slate-950 px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-105 transition-transform disabled:opacity-50">
-                <Plus size={18} /> Novo Provisionamento
+                <Plus size={18} /> Novo Domínio
               </button>
             )}
           </div>
@@ -198,11 +204,11 @@ function App() {
                 </div>
                 <div className="flex gap-3">
                   <button onClick={() => { setActiveStoreId(store.id); setView('SHOP'); }} className="flex-1 bg-slate-800 py-2 rounded-lg text-white font-bold text-xs hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
-                    <ExternalLink size={14} /> Abrir Loja
+                    <ExternalLink size={14} /> Abrir
                   </button>
                   {isAdmin && (
                     <button onClick={() => { setActiveStoreId(store.id); setIsEditorOpen(true); }} className="flex-1 bg-gold/10 py-2 rounded-lg text-gold font-bold text-xs hover:bg-gold/20 transition-colors flex items-center justify-center gap-2">
-                      <Hammer size={14} /> Customizar
+                      <Hammer size={14} /> Editar
                     </button>
                   )}
                 </div>
@@ -210,11 +216,11 @@ function App() {
             ))}
           </div>
         </main>
+        <ValidatorModal isOpen={isValidatorOpen} onClose={() => setIsValidatorOpen(false)} />
       </div>
     );
   }
 
-  // ... (Restante do código do Shop/Checkout permanece similar, mas usando o activeStore do estado)
   return (
     <div className="min-h-screen transition-colors duration-500 pb-20" style={{ backgroundColor: 'var(--bg-color)', color: 'white', fontFamily: 'var(--store-font), sans-serif' }}>
       <header className="sticky top-0 z-30 bg-stone-950/80 backdrop-blur-md border-b border-stone-800 p-4">
@@ -231,7 +237,7 @@ function App() {
           <div className="flex items-center gap-4">
             {isAdmin && (
               <button onClick={() => setIsEditorOpen(true)} className="flex items-center gap-2 bg-stone-900 border border-stone-800 px-3 py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-gold transition-colors">
-                <Hammer size={16} /> Painel do Domínio
+                <Hammer size={16} /> Customizar
               </button>
             )}
             <button className="relative p-2 text-stone-200 bg-stone-900 border border-stone-800 rounded-lg" onClick={() => setIsCartOpen(true)}>

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { CartItem, CustomerDetails } from '../types';
 import { FLAVOR_TEXTS } from '../constants';
