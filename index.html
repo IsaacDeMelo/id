@@ -1,13 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>O Empório do Dragão Dourado</title>
-    <!-- Tailwind CSS -->
+    <title>Scribe's Forge - NoCode RPG Store Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel, Lato, Zeyada & Monsieur La Doulaise (Assinatura de Pena) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&family=Monsieur+La+Doulaise&family=Zeyada&display=swap" rel="stylesheet">
@@ -22,19 +21,31 @@
               signature: ['"Monsieur La Doulaise"', 'cursive'],
             },
             colors: {
-              gold: '#d4af37',
-              stone: {
-                950: '#0c0a09', // Dark background
-              },
-              parchment: '#f5e6c8',
-              ink: '#3a2a1d' // Um marrom ainda mais profundo para parecer tinta velha
+              gold: 'var(--primary-color)',
             }
           }
         }
       }
     </script>
     <style>
-      /* Efeito de "tinta de pena" - leve variação de opacidade e borrão sutil */
+      :root {
+        --primary-color: #d4af37;
+        --bg-color: #0c0a09;
+        --card-color: #1c1917;
+        --parchment-color: #f5e6c8;
+        --ink-color: #3a2a1d;
+        --border-radius: 8px;
+        --store-font: 'Cinzel';
+      }
+
+      @keyframes slideIn {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+      }
+      .animate-slide-in {
+        animation: slideIn 0.3s ease-out;
+      }
+      
       .quill-ink {
         filter: contrast(120%) brightness(90%) drop-shadow(0.2px 0.2px 0px rgba(0,0,0,0.2));
         opacity: 0.95;
@@ -49,14 +60,18 @@
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "html2canvas": "https://esm.sh/html2canvas@^1.4.1",
     "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "path": "https://esm.sh/path@^0.12.7",
+    "cors": "https://esm.sh/cors@^2.8.5",
+    "url": "https://esm.sh/url@^0.11.4",
+    "express": "https://esm.sh/express@^5.2.1",
+    "mongoose": "https://esm.sh/mongoose@^9.1.2"
   }
 }
 </script>
 </head>
-  <body class="bg-stone-950 text-stone-200 font-sans antialiased selection:bg-gold selection:text-stone-950">
+  <body class="antialiased selection:bg-gold selection:text-stone-950">
     <div id="root"></div>
-    <!-- Entry point for Vite build -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

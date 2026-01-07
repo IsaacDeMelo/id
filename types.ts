@@ -1,3 +1,4 @@
+
 export type Category = 'weapon' | 'armor' | 'potion' | 'misc';
 
 export interface Product {
@@ -19,4 +20,23 @@ export interface CustomerDetails {
   guild?: string;
 }
 
-export type ViewState = 'SHOP' | 'CHECKOUT' | 'INVOICE';
+export interface StoreTheme {
+  primaryColor: string; 
+  backgroundColor: string; 
+  cardColor: string; 
+  parchmentColor: string; 
+  inkColor: string; 
+  borderRadius: string; 
+  fontFamily: 'Cinzel' | 'Lato' | 'Serif' | 'Monospace';
+}
+
+export interface StoreConfig {
+  id: string;
+  slug: string; // Utilizado para url/slug.acdm.online
+  storeName: string;
+  storeTagline: string;
+  theme: StoreTheme;
+  products: Product[];
+}
+
+export type ViewState = 'HUB' | 'SHOP' | 'CHECKOUT' | 'INVOICE' | 'EDITOR';
